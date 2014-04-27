@@ -1,0 +1,2 @@
+# usage: testscanner /path/to/individual/media/folder
+PYTHONPATH=/opt/plexmediaserver/Resources/Plug-ins/Scanners.bundle/Contents/Resources/Common python2 Plex\ Series\ Scanner\ \(with\ disc\ image\ support\).py "$@"
