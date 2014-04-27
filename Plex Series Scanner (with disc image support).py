@@ -325,16 +325,6 @@ def find_data(atom, name):
   if data_atom and 'data' in data_atom.attrs:
     return data_atom.attrs['data']
 
-import sys
-
-if __name__ == '__main__':
-  print "Hello, world!"
-  path = sys.argv[1]
-  files = [os.path.join(path, file) for file in os.listdir(path)]
-  media = []
-  Scan(path[1:], files, media, [])
-  print "Media:", media
-
 
 video_exts = ['3g2', '3gp', 'asf', 'asx', 'avc', 'avi', 'avs', 'bin', 'bivx', 'bup', 'divx', 'dv', 'dvr-ms', 'evo', 'fli', 'flv', 'ifo', 'img',
               'iso', 'm2t', 'm2ts', 'm2v', 'm4v', 'mkv', 'mov', 'mp4', 'mpeg', 'mpg', 'mts', 'nrg', 'nsv', 'nuv', 'ogm', 'ogv', 'tp',
@@ -543,3 +533,14 @@ def FindYear(words):
     i += 1
 
   return None
+
+
+import sys
+
+if __name__ == '__main__':
+  print "Hello, world!"
+  path = sys.argv[1]
+  files = [os.path.join(path, file) for file in os.listdir(path)]
+  media = []
+  Scan(path[1:], files, media, [])
+  print "Media:", media
