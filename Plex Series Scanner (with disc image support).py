@@ -47,7 +47,32 @@ def Scan(path, files, mediaList, subdirs, language=None, root=None):
   paths = Utils.SplitPath(path)
   shouldStack = True
 
-  if len(paths) == 1 and len(paths[0]) == 0:
+  if len(paths) >= 3 and paths[-1].lower() == 'stream' and paths[-2].lower() == 'bdmv':
+
+    for rx in episode_regexps[0:-1]:
+      match = re.search(rx, paths[-3], re.IGNORECASE)
+      if match:
+
+        # Extract data.
+        show = match.group('show')
+        season = int(match.group('season'))
+        episode = int(match.group('ep'))
+        endEpisode = episode
+        if match.groupdict().has_key('secondEp') and match.group('secondEp'):
+          endEpisode = int(match.group('secondEp'))
+
+        # Clean title.
+        name, year = CleanName(show)
+        if len(name) > 0:
+          for ep in range(episode, endEpisode+1):
+            tv_show = Media.Episode(name, season, ep, '', year)
+            tv_show.display_offset = (ep-episode)*100/(endEpisode-episode+1)
+            for i in files:
+              tv_show.parts.append(i)
+            mediaList.append(tv_show)
+
+
+  elif len(paths) == 1 and len(paths[0]) == 0:
 
     # Run the select regexps we allow at the top level.
     for i in files:
